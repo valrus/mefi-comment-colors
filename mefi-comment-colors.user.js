@@ -22,7 +22,7 @@ function performColoring()
             .filter(function() { return this.name.match(/\d+/); })
             .next("div.comments");
     $comments.each(function() {
-        var $userlink = $(this).find("span.smallcopy:first-child").filter("a");
+        var $userlink = $(this).find("span.smallcopy > a.first");
         var username = $userlink.html();
         var usercolor = userColors[username];
         if (usercolor !== undefined) {
