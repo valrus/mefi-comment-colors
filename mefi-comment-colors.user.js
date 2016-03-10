@@ -26,7 +26,9 @@ function performColoring()
         var username = $userlink.html();
         var usercolor = userColors[username];
         if (usercolor !== undefined) {
-            $(this).attr("style", function(i, val) { return val + "color: " + usercolor + ";"; });
+            $(this).attr("style", function(i, val) {
+                return (val === undefined ? '' : val) + "color: " + usercolor + ";";
+            });
         }
     });
 }
