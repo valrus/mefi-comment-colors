@@ -34,4 +34,4 @@ function performColoring()
     });
 }
 
-performColoring();
+document.addEventListener('DOMContentLoaded', performColoring, true);
