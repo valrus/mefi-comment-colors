@@ -27,3 +27,9 @@ function performColoring()
         }
     });
 }
+
+$(document).ready(
+    function() {
+        performColoring();
+    }
+);
