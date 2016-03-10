@@ -8,6 +8,7 @@
 // @resource https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css
 // @grant GM_setValue
 // @grant GM_getValue
+// @run-at document-start
 // ==/UserScript==
 
 // Tip from http://wiki.greasespot.net/@grant#Scope
@@ -33,8 +34,4 @@ function performColoring()
     });
 }
 
-$(document).ready(
-    function() {
-        performColoring();
-    }
-);
+performColoring();
