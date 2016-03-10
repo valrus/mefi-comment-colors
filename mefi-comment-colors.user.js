@@ -10,6 +10,9 @@
 // @grant GM_getValue
 // ==/UserScript==
 
+// Tip from http://wiki.greasespot.net/@grant#Scope
+this.$ = this.jQuery = jQuery.noConflict(true);
+
 var userColors = [];
 userColors["valrus"] = "#000";
 
