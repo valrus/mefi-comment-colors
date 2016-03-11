@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Colorful Comments
 // @namespace http://ian.mccowan.space
-// @description Color comments by username..
+// @description Color comments by username.
 // @include http://www.metafilter.com/*
 // @require https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js
 // @require https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js
