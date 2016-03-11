@@ -82,7 +82,7 @@ function initialSetup()
                 var colorHex = color.toHexString();
                 username = $(this).attr("name");
                 userHash = hashCode(username).toString();
-                if (colorHex == "#000000") {
+                if (colorHex == "#ffffff") {
                     delete userColors[userHash];
                     GM_deleteValue(userHash);
                 }
