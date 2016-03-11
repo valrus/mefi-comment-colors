@@ -28,12 +28,6 @@ GM_listValues().forEach(function(val) {
     userColors[val] = GM_getValue(val);
 });
 
-/*
-$("head").append (
-    '<link href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css" rel="stylesheet" type="text/css">'
-);
- */
-
 function hashCode(str) {
     var hash = 0;
     if (str.length === 0) return hash;
