@@ -53,10 +53,8 @@ function addPicker($comment, $userlink, username, usercolor)
 
 function performColoring($comment, $userlink, username, usercolor)
 {
-    if (usercolor !== undefined) {
-        $comment.css("color", usercolor);
-        $comment.find('.colorpicker').spectrum("set", usercolor);
-    }
+    $comment.css("color", usercolor === undefined ? "" : usercolor);
+    $comment.find('.colorpicker').spectrum("set", usercolor === undefined ? "#ffffff" : usercolor);
 }
 
 function forComments($comments, func)
