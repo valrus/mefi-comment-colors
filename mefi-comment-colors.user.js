@@ -79,10 +79,10 @@ function initialSetup()
     $(".colorpicker").each(function() {
         $(this).spectrum({
             change: function(color) {
-                var colorHex = color.toHexString();
+                var colorHex = color.toHexString().toLowerCase();
                 username = $(this).attr("name");
                 userHash = hashCode(username).toString();
-                if (colorHex == "#ffffff") {
+                if (colorHex == "#ffffff" || colorHex == "#fff") {
                     delete userColors[userHash];
                     GM_deleteValue(userHash);
                 }
