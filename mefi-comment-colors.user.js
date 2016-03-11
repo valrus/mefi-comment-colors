@@ -67,6 +67,24 @@ function forComments($comments, func)
     });
 }
 
+function colorChange(color) {
+    var colorHex = color.toHexString().toLowerCase();
+    username = $(this).attr("name");
+    userHash = hashCode(username).toString();
+    if (colorHex == "#ffffff" || colorHex == "#fff") {
+        delete userColors[userHash];
+        GM_deleteValue(userHash);
+    }
+    else {
+        userColors[userHash] = colorHex;
+        GM_setValue(userHash, colorHex);
+    }
+    var $comments = $("a[name]")
+            .filter(function() { return this.name.match(/\d+/); })
+            .next("div.comments");
+    forComments($comments, performColoring);
+}
+
 function initialSetup()
 {
     console.log(userColors);
@@ -74,23 +92,8 @@ function initialSetup()
             .filter(function() { return this.name.match(/\d+/); })
             .next("div.comments");
     forComments($comments, addPicker);
-    $(".colorpicker").each(function() {
-        $(this).spectrum({
-            change: function(color) {
-                var colorHex = color.toHexString().toLowerCase();
-                username = $(this).attr("name");
-                userHash = hashCode(username).toString();
-                if (colorHex == "#ffffff" || colorHex == "#fff") {
-                    delete userColors[userHash];
-                    GM_deleteValue(userHash);
-                }
-                else {
-                    userColors[userHash] = colorHex;
-                    GM_setValue(userHash, colorHex);
-                }
-                forComments($comments, performColoring);
-            }
-        });
+    $(".colorpicker").spectrum({
+        change: colorChange
     });
     forComments($comments, performColoring);
 }
