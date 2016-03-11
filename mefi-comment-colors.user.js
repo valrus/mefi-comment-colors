@@ -30,10 +30,19 @@ $("head").append (
 );
  */
 
-function addPicker($userlink)
+function hashCode(str) {
+    var hash = 0;
+    if (str.length === 0) return hash;
+    for (i = 0; i < str.length; i++) {
+        char = str.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+
+function addPicker($comment, $userlink, username, usercolor)
 {
-    var username = $userlink.html();
-    var usercolor = userColors[username];
     $userlink.after(
         "<input " +
             "type='text' " +
@@ -44,14 +53,11 @@ function addPicker($userlink)
     );
 }
 
-function performColoring($userlink)
+function performColoring($comment, $userlink, username, usercolor)
 {
-    var username = $userlink.html();
-    var usercolor = userColors[username];
     if (usercolor !== undefined) {
-        $(this).attr("style", function(i, val) {
-            return (val === undefined ? '' : val) + "color: " + usercolor + ";";
-        });
+        $comment.css("color", usercolor);
+        $comment.find('.colorpicker').spectrum("set", usercolor);
     }
 }
 
@@ -59,7 +65,9 @@ function forComments($comments, func)
 {
     $comments.each(function() {
         var $userlink = $(this).find("span.smallcopy > a:first");
-        func($userlink);
+        var username = $userlink.html();
+        var usercolor = userColors[username];
+        func($(this), $userlink, username, usercolor);
     });
 }
 
@@ -69,8 +77,16 @@ function initialSetup()
             .filter(function() { return this.name.match(/\d+/); })
             .next("div.comments");
     forComments($comments, addPicker);
+    $(".colorpicker").each(function() {
+        $(this).spectrum({
+            change: function(color) {
+                username = $(this).attr("name");
+                userColors[username] = color.toHexString();
+                forComments($comments, performColoring);
+            }
+        });
+    });
     forComments($comments, performColoring);
-    $(".colorpicker").spectrum({});
 }
 
 document.addEventListener('DOMContentLoaded', initialSetup, true);
