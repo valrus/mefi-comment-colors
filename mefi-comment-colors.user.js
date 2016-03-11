@@ -9,6 +9,8 @@
 // @grant GM_addStyle
 // @grant GM_setValue
 // @grant GM_getValue
+// @grant GM_deleteValue
+// @grant GM_listValues
 // @grant GM_getResourceText
 // @run-at document-start
 // ==/UserScript==
@@ -22,7 +24,9 @@ GM_addStyle('.sp-preview { width: 1em; height: 1em; }');
 this.$ = this.jQuery = jQuery.noConflict(true);
 
 var userColors = [];
-userColors["valrus"] = "#000";
+GM_listValues().forEach(function(val) {
+    userColors[val] = GM_getValue(val);
+});
 
 /*
 $("head").append (
@@ -35,7 +39,7 @@ function hashCode(str) {
     if (str.length === 0) return hash;
     for (i = 0; i < str.length; i++) {
         char = str.charCodeAt(i);
-        hash = ((hash<<5)-hash)+char;
+        hash = ((hash<<5) - hash)+char;
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
@@ -66,13 +70,14 @@ function forComments($comments, func)
     $comments.each(function() {
         var $userlink = $(this).find("span.smallcopy > a:first");
         var username = $userlink.html();
-        var usercolor = userColors[username];
+        var usercolor = userColors[hashCode(username)];
         func($(this), $userlink, username, usercolor);
     });
 }
 
 function initialSetup()
 {
+    console.log(userColors);
     var $comments = $("a[name]")
             .filter(function() { return this.name.match(/\d+/); })
             .next("div.comments");
@@ -80,8 +85,17 @@ function initialSetup()
     $(".colorpicker").each(function() {
         $(this).spectrum({
             change: function(color) {
+                var colorHex = color.toHexString();
                 username = $(this).attr("name");
-                userColors[username] = color.toHexString();
+                userHash = hashCode(username).toString();
+                if (colorHex == "#000000") {
+                    delete userColors[userHash];
+                    GM_deleteValue(userHash);
+                }
+                else {
+                    userColors[userHash] = colorHex;
+                    GM_setValue(userHash, colorHex);
+                }
                 forComments($comments, performColoring);
             }
         });
