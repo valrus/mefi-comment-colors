@@ -14,11 +14,11 @@
 // @run-at document-start
 // ==/UserScript==
 
-GM_addStyle('.colorPicker { width: 20px; height: 20px; position: relative; clear: both; display: inline-block;}' );
-GM_addStyle('.colorPicker .color { width: 18px; height: 18px; padding: 1px; border: 1px solid #ccc; display: block; position: relative; z-index: 11; background-color: #EFEFEF; -webkit-border-radius: 27px; -moz-border-radius: 27px; border-radius: 27px; cursor: pointer; }');
-GM_addStyle('.colorPicker .colorInner { display: inline-block; width: 18px; height: 18px; -webkit-border-radius: 20px; -moz-border-radius: 20px; border-radius: 20px; }');
-GM_addStyle('#shared-dropdown { list-style: none; display: none; width: 18px; position: absolute; top: 28px; border: 1px solid #ccc; left: 0; z-index: 1000; }');
-GM_addStyle('#shared-dropdown li { height: 16px; width: 16px; cursor: pointer; }');
+GM_addStyle('.colorPicker { height: 1em; margin: 0 0.5ex; position: relative; clear: both; display: inline-block;}' );
+GM_addStyle('.colorPicker .color { width: 1em; height: 1em; display: block; position: relative; z-index: 11; cursor: pointer; }');
+GM_addStyle('.colorPicker .colorInner { display: inline-block; border: 1px solid #ccc; width: 1em; height: 1em; }');
+GM_addStyle('ul#shared-dropdown { list-style: none; display: none; margin-top: 0; padding: 0; margin-left: -1px; width: 400px; position: absolute; z-index: 1000; }');
+GM_addStyle('#shared-dropdown li { display: inline-block; float: left; height: 1em; width: 1em; border: 1px solid #ccc; margin: 1px; cursor: pointer; }');
 
 // Tip from http://wiki.greasespot.net/@grant#Scope
 this.$ = this.jQuery = jQuery.noConflict(true);
