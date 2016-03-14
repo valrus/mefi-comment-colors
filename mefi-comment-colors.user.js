@@ -4,7 +4,7 @@
 // @description Color comments by username.
 // @include http://www.metafilter.com/*
 // @require https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js
-// @require https://raw.githubusercontent.com/valrus/tinycolorpicker/master/lib/jquery.tinycolorpicker.js
+// @require https://raw.githubusercontent.com/valrus/tinycolorpicker/master/lib/jquery.tinycolorpicker.min.js
 // @grant GM_addStyle
 // @grant GM_setValue
 // @grant GM_getValue
