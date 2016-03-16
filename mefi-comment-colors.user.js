@@ -4,7 +4,7 @@
 // @description Color comments by username.
 // @include *://*.metafilter.com/*
 // @require https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js
-// @require https://raw.githubusercontent.com/valrus/tinycolorpicker/mefi-comments-v0.2/lib/jquery.tinycolorpicker.min.js
+// @require https://raw.githubusercontent.com/valrus/tinycolorpicker/master/lib/jquery.tinycolorpicker.js
 // @grant GM_addStyle
 // @grant GM_setValue
 // @grant GM_getValue
@@ -16,9 +16,9 @@
 
 GM_addStyle('.colorPicker { height: 1em; margin: 0 0.5ex; position: relative; clear: both; display: inline-block;}');
 GM_addStyle('.colorPicker .color { width: 1em; height: 1em; display: block; position: relative; z-index: 11; cursor: pointer; }');
-GM_addStyle('.colorPicker .colorInner { display: inline-block; border: 1px solid #ccc; width: 1em; height: 1em; text-align: center; vertical-align: top; }');
+GM_addStyle('.colorPicker .colorInner { display: inline-block; border: 1px solid #ccc; width: 1em; height: 1em; text-align: center; vertical-align: top; line-height: 14px; }');
 GM_addStyle('ul#shared-dropdown { list-style: none; display: none; margin-top: 0; padding: 0; margin-left: -1px; width: 400px; position: absolute; z-index: 1000; }');
-GM_addStyle('#shared-dropdown li { display: inline-block; float: left; height: 1em; width: 1em; border: 1px solid #ccc; margin: 1px; cursor: pointer; text-align: center; }');
+GM_addStyle('#shared-dropdown li { display: inline-block; float: left; height: 1em; width: 1em; border: 1px solid #ccc; margin: 1px; cursor: pointer; text-align: center; line-height: 14px; }');
 
 // Tip from http://wiki.greasespot.net/@grant#Scope
 this.$ = this.jQuery = jQuery.noConflict(true);
