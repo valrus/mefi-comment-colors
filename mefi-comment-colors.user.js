@@ -14,11 +14,11 @@
 // @run-at document-start
 // ==/UserScript==
 
-GM_addStyle('.colorPicker { height: 1em; margin: 0 0.5ex; position: relative; clear: both; display: inline-block;}' );
+GM_addStyle('.colorPicker { height: 1em; margin: 0 0.5ex; position: relative; clear: both; display: inline-block;}');
 GM_addStyle('.colorPicker .color { width: 1em; height: 1em; display: block; position: relative; z-index: 11; cursor: pointer; }');
-GM_addStyle('.colorPicker .colorInner { display: inline-block; border: 1px solid #ccc; width: 1em; height: 1em; }');
+GM_addStyle('.colorPicker .colorInner { display: inline-block; border: 1px solid #ccc; width: 1em; height: 1em; text-align: center; vertical-align: top; }');
 GM_addStyle('ul#shared-dropdown { list-style: none; display: none; margin-top: 0; padding: 0; margin-left: -1px; width: 400px; position: absolute; z-index: 1000; }');
-GM_addStyle('#shared-dropdown li { display: inline-block; float: left; height: 1em; width: 1em; border: 1px solid #ccc; margin: 1px; cursor: pointer; }');
+GM_addStyle('#shared-dropdown li { display: inline-block; float: left; height: 1em; width: 1em; border: 1px solid #ccc; margin: 1px; cursor: pointer; text-align: center; }');
 
 // Tip from http://wiki.greasespot.net/@grant#Scope
 this.$ = this.jQuery = jQuery.noConflict(true);
@@ -51,7 +51,7 @@ function addPicker($comment, $userlink, username, usercolor)
 {
     $userlink.after(
         "<div class='colorPicker' " +
-            "value='" + (usercolor === undefined ? "#ffffff" : usercolor) + "' " +
+            "value='" + (usercolor === undefined ? "" : usercolor) + "' " +
             "name='" + username +
 
             "'><a class='color'><div class='colorInner'></div></a><input type='hidden' class='colorInput'/></div>"
@@ -62,7 +62,7 @@ function performColoring($comment, $userlink, username, usercolor)
 {
     $comment.css("color", usercolor === undefined ? "" : usercolor);
     var $picker = $comment.find(".colorPicker");
-    $picker.data("plugin_tinycolorpicker").setColor(usercolor === undefined ? "#ffffff" : usercolor, $picker);
+    $picker.data("plugin_tinycolorpicker").setColor(usercolor === undefined ? "" : usercolor, $picker);
 }
 
 function forComments($comments, func)
@@ -79,7 +79,7 @@ function colorChange(elem, colorHex, colorRgb) {
     var lcColor = colorHex.toLowerCase();
     username = elem.attr("name");
     userHash = hashCode(username).toString();
-    if (lcColor == "#ffffff" || lcColor == "#fff") {
+    if (!lcColor) {
         delete userColors[userHash];
         GM_deleteValue(userHash);
     }
